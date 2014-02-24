@@ -14,6 +14,7 @@ public class Shell {
         Shell shell = new Shell();
 
         shell.getCommands().put("exit", new ExitCommand());
+        shell.getCommands().put("echo", new EchoCommand());
 
         shell.repl();
     }
