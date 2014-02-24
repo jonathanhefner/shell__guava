@@ -31,6 +31,7 @@ public class Shell {
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.print(getPrompt());
+            System.out.flush();
         } while (scanner.hasNextLine() && eval(scanner.nextLine()));
     }
 
