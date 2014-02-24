@@ -15,6 +15,7 @@ public class Shell {
 
         shell.getCommands().put("exit", new ExitCommand());
         shell.getCommands().put("echo", new EchoCommand());
+        shell.getCommands().put("pwd", new PwdCommand());
 
         shell.repl();
     }
