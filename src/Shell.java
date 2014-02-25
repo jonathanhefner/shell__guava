@@ -1,4 +1,5 @@
 import com.google.common.base.CharMatcher;
+import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
 import com.google.common.base.StandardSystemProperty;
 import com.google.common.collect.Iterables;
@@ -66,8 +67,20 @@ public class Shell {
 
 
     public void error(String s) {
-        this.print("ERROR: ");
+        this.print("ERROR ");
         this.println(s);
+    }
+
+
+    public Optional<File> checkFile(String path, FileCheck... checks) {
+        File f = new File(getWorkingDir(), path);
+        Optional<FileCheck> failed = FileCheck.firstFalse(f, checks);
+        if (failed.isPresent()) {
+            this.error(failed.get().getErrorMessage() + ": " + path);
+            return Optional.absent();
+        } else {
+            return Optional.of(f);
+        }
     }
 
 
