@@ -1,6 +1,5 @@
-/**
- * Created by Administrator on 2/24/14.
- */
+import java.io.IOException;
+
 public interface Command {
-    boolean eval(Shell shell, String args);
+    boolean eval(Shell shell, String args) throws IOException;
 }

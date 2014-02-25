@@ -5,8 +5,10 @@ import com.google.common.base.StandardSystemProperty;
 import com.google.common.collect.Iterables;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Shell {
@@ -30,7 +32,7 @@ public class Shell {
     private String prompt = "> ";
 
 
-    public void repl() {
+    public void repl() throws IOException {
         Scanner scanner = new Scanner(System.in);
         do {
             this.print(getPrompt());
@@ -38,7 +40,7 @@ public class Shell {
     }
 
 
-    public boolean eval(String input) {
+    public boolean eval(String input) throws IOException {
         String[] parts = Iterables.toArray(INPUT_SPLITTER.split(input), String.class);
 
         if (parts.length >= 1) {
@@ -92,8 +94,8 @@ public class Shell {
         return workingDir;
     }
 
-    public void setWorkingDir(File workingDir) {
-        this.workingDir = workingDir;
+    public void setWorkingDir(File workingDir) throws IOException {
+        this.workingDir = Objects.requireNonNull(workingDir).getCanonicalFile();
     }
 
     public String getPrompt() {
@@ -101,7 +103,7 @@ public class Shell {
     }
 
     public void setPrompt(String prompt) {
-        this.prompt = prompt;
+        this.prompt = Objects.requireNonNull(prompt);
     }
 
 }
