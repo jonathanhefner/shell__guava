@@ -8,8 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Scanner;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Shell {
 
@@ -96,7 +97,7 @@ public class Shell {
     }
 
     public void setWorkingDir(File workingDir) throws IOException {
-        this.workingDir = Objects.requireNonNull(workingDir).getCanonicalFile();
+        this.workingDir = checkNotNull(workingDir).getCanonicalFile();
     }
 
     public String getPrompt() {
@@ -104,7 +105,7 @@ public class Shell {
     }
 
     public void setPrompt(String prompt) {
-        this.prompt = Objects.requireNonNull(prompt);
+        this.prompt = checkNotNull(prompt);
     }
 
 }
