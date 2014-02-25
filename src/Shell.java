@@ -20,20 +20,20 @@ public class Shell {
         shell.repl();
     }
 
+
     private final static Splitter INPUT_SPLITTER = Splitter.on(CharMatcher.WHITESPACE).limit(2).omitEmptyStrings();
 
 
     private final Map<String, Command> commands = new HashMap<>();
-    private File currentWorkingDir = new File(StandardSystemProperty.USER_DIR.value());
+    private File workingDir = new File(StandardSystemProperty.USER_DIR.value());
     private String prompt = "> ";
 
 
     public void repl() {
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.print(getPrompt());
-            System.out.flush();
-        } while (scanner.hasNextLine() && eval(scanner.nextLine()));
+            this.print(getPrompt());
+        } while (scanner.hasNextLine() && this.eval(scanner.nextLine()));
     }
 
 
@@ -43,7 +43,7 @@ public class Shell {
         if (parts.length >= 1) {
             Command command = commands.get(parts[0]);
             if (command == null) {
-                System.out.println("ERROR: unrecognized command");
+                this.error("unrecognized command");
                 return true;
             } else {
                 return command.eval(this, parts.length >= 2 ? parts[1] : "");
@@ -54,16 +54,33 @@ public class Shell {
     }
 
 
+    public void print(String s) {
+        System.out.print(s);
+        System.out.flush();
+    }
+
+
+    public void println(String s) {
+        System.out.println(s);
+    }
+
+
+    public void error(String s) {
+        this.print("ERROR: ");
+        this.println(s);
+    }
+
+
     public Map<String, Command> getCommands() {
         return commands;
     }
 
-    public File getCurrentWorkingDir() {
-        return currentWorkingDir;
+    public File getWorkingDir() {
+        return workingDir;
     }
 
-    public void setCurrentWorkingDir(File currentWorkingDir) {
-        this.currentWorkingDir = currentWorkingDir;
+    public void setWorkingDir(File workingDir) {
+        this.workingDir = workingDir;
     }
 
     public String getPrompt() {
