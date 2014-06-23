@@ -1,10 +1,12 @@
+package shell;
+
 import java.io.IOException;
 
-public class EchoCommand implements Command {
+public class PwdCommand implements Command {
 
     @Override
     public boolean eval(Shell shell, String args) throws IOException {
-        shell.println(args);
+        shell.println(shell.getWorkingDir().getAbsolutePath());
         return true;
     }
 

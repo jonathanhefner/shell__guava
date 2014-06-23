@@ -1,3 +1,5 @@
+package shell;
+
 import com.google.common.base.Optional;
 
 import java.io.File;

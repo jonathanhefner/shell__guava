@@ -1,3 +1,5 @@
+package shell;
+
 import java.io.IOException;
 
 public class ExitCommand implements Command {
