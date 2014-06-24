@@ -22,3 +22,5 @@ TERM=dumb gradle run
 gradle distJar
 java -jar build/libs/shell.jar
 ```
+
+Type `help` to see a list of available commands.
