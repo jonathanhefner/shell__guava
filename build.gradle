@@ -18,6 +18,8 @@ run {
 }
 
 task distJar(type: Jar) {
+    baseName = 'shell'
+
     from files(sourceSets.main.output.classesDir)
     from configurations.runtime.asFileTree.files.collect { zipTree(it) }
 
