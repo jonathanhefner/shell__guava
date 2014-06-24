@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = '1.7'
+
+mainClassName = 'shell.Shell'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:16.0'
+}
+
+run {
+    standardInput = System.in
+}
+
+task distJar(type: Jar) {
+    from files(sourceSets.main.output.classesDir)
+    from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}

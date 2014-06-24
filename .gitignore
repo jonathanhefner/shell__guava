@@ -1,5 +1,6 @@
 lib/
 build/
+.gradle/
 
 # Via https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 .idea/
