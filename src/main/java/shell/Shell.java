@@ -19,6 +19,7 @@ public class Shell {
     public static void main(String[] args) throws Exception {
         Shell shell = new Shell();
 
+        shell.getCommands().put("help", new HelpCommand());
         shell.getCommands().put("exit", new ExitCommand());
         shell.getCommands().put("echo", new EchoCommand());
         shell.getCommands().put("pwd", new PwdCommand());
